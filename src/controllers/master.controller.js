@@ -1,23 +1,22 @@
 const express = require("express");
-const User = require("../models/user.model");
-
 const router = express.Router();
 
-// -----------------user CRUD--------------
+const MasterAccount = require("../models/master.model");
 
+//--------------Master A/C CRUD--------------
 router.post("/", async (req, res) => {
   try {
-    const user = await User.create(req.body);
-    return res.send({ user: user });
+    const master = await MasterAccount.create(req.body);
+    return res.send(master);
   } catch (err) {
-    return res.status(500).send({ message: err.message });
+    return res.status(500).send(err.message);
   }
 });
 
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find().lean().exec();
-    return res.send(users);
+    const master = await MasterAccount.find().lean().exec();
+    return res.send(master);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -25,7 +24,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).lean().exec();
+    const user = await MasterAccount.findById(req.params.id).lean().exec();
     return res.send(user);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -34,9 +33,13 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const user = await MasterAccount.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
     return res.send(user);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -45,7 +48,7 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await MasterAccount.findByIdAndDelete(req.params.id);
     return res.send(user);
   } catch (err) {
     return res.status(500).send(err.message);

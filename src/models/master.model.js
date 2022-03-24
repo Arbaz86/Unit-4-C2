@@ -1,16 +1,15 @@
-
 const mongoose = require("mongoose");
 
 //--------------master A/c Schema-------------------
 
 const masterSchema = new mongoose.Schema(
-    {
-        balance: {type:Number, required: true}, 
-    },
-    {
-        versionKey: false,
-        timestamps: true
-    }
-)
+  {
+    balance: { type: Number, required: true },
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model("master", masterSchema)
+module.exports = new mongoose.model("master", masterSchema);
